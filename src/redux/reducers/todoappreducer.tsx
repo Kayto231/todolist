@@ -1,55 +1,58 @@
 import { AnyAction } from "redux";
-import { ADD_TASK, CHANGE_COMPLETED_STATE, REMOVE_TASK } from "../consts";
+import {
+  ADD_TASK,
+  CHANGE_COMPLETED_STATE,
+  CHANGE_ISEDIT_STATE,
+  GET_TASKS_LOADED,
+  REMOVE_TASK,
+  SET_EDIT_OBJECT,
+  SET_SEARCH_INPUT,
+} from "../consts";
 
 interface Itask {
   content: string;
   status: string;
-  priority: string;
   isDone: boolean;
   id: number;
+  priority: string;
 }
 
 interface ItodoAppState {
   tasks: Itask[];
   isEdit: boolean;
+  editObject: any;
+  searchInput: string;
 }
 
 const initialState: ItodoAppState = {
-  tasks: [
-    {
-      content: "Monitor system performance and adjust hardware.",
-      status: "Pending",
-      priority: "Minor",
-      isDone: false,
-      id: 1,
-    },
-    {
-      content: "Monitor system performance and adjust hardware. 2",
-      status: "Pending",
-      priority: "Minor",
-      isDone: false,
-      id: 2,
-    },
-    {
-      content: "Monitor system performance and adjust hardware. 3",
-      status: "Pending",
-      priority: "Minor",
-      isDone: true,
-      id: 3,
-    },
-    {
-      content: "Monitor system performance and adjust hardware. 4",
-      status: "Pending",
-      priority: "Minor",
-      isDone: true,
-      id: 4,
-    },
-  ],
+  tasks: [],
   isEdit: false,
+  editObject: {},
+  searchInput: "",
 };
 
 export const todoAppReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
+    case SET_SEARCH_INPUT:
+      return {
+        ...state,
+        searchInput: action.payload,
+      };
+    case SET_EDIT_OBJECT:
+      return {
+        ...state,
+        editObject: action.payload,
+      };
+    case CHANGE_ISEDIT_STATE:
+      return {
+        ...state,
+        isEdit: action.payload,
+      };
+    case GET_TASKS_LOADED:
+      return {
+        ...state,
+        tasks: action.payload,
+      };
     case ADD_TASK:
       return {
         ...state,

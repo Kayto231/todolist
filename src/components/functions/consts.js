@@ -1,0 +1,6 @@
+export const RED_COLOR = "RED_COLOR";
+export const GREEN_COLOR = "GREEN_COLOR";
+export const ORANGE_COLOR = "ORANGE_COLOR";
+
+export const PENDING_STATUS = "PENDING_STATUS";
+export const PROGRESS_STATUS = "PROGRESS_STATUS";

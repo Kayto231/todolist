@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../index.scss";
 
 import { Link } from "react-router-dom";
 import Content_Item from "../Content__Item/Content_Item";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getTasksLoadedFunction } from "../../redux/actions/todoappactions";
 
 const Main_Content = () => {
-  const { tasks } = useSelector((state) => state.todo);
-  console.log(tasks);
+  const { tasks, searchInput } = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTasksLoadedFunction());
+  }, []);
+
   return (
     <main className="main">
       <div className="main__header">
@@ -28,20 +34,37 @@ const Main_Content = () => {
         <h1 className="text">On Hold</h1>
         <div className="content__block">
           {tasks.length >= 1 ? (
-            tasks
-              .filter((el) => el.isDone === false)
-              .map((el) => (
-                <Content_Item
-                  content={el.content}
-                  status={el.status}
-                  priority={el.priority}
-                  isDone={el.isDone}
-                  id={el.id}
-                  key={el.id}
-                />
-              ))
+            searchInput.length >= 1 ? (
+              tasks
+                .filter((el) =>
+                  el.content.toLowerCase().includes(searchInput.toLowerCase())
+                )
+                .map((el) => (
+                  <Content_Item
+                    content={el.content}
+                    status={el.status}
+                    priority={el.priority}
+                    isDone={el.isDone}
+                    id={el.id}
+                    key={el.id}
+                  />
+                ))
+            ) : (
+              tasks
+                .filter((el) => el.isDone === false)
+                .map((el) => (
+                  <Content_Item
+                    content={el.content}
+                    status={el.status}
+                    priority={el.priority}
+                    isDone={el.isDone}
+                    id={el.id}
+                    key={el.id}
+                  />
+                ))
+            )
           ) : (
-            <span>Nothing is added</span>
+            <span className="span__text__absente">Create your first task!</span>
           )}
         </div>
       </div>
@@ -55,20 +78,26 @@ const Main_Content = () => {
           </h1>
         </div>
         {tasks.length >= 1 ? (
-          tasks
-            .filter((el) => el.isDone === true)
-            .map((el) => (
-              <Content_Item
-                content={el.content}
-                status={el.status}
-                priority={el.priority}
-                isDone={el.isDone}
-                id={el.id}
-                key={el.id}
-              />
-            ))
+          searchInput.length >= 1 ? (
+            <span className="span__text__absente">
+              Add a task and complete!
+            </span>
+          ) : (
+            tasks
+              .filter((el) => el.isDone === true)
+              .map((el) => (
+                <Content_Item
+                  content={el.content}
+                  status={el.status}
+                  priority={el.priority}
+                  isDone={el.isDone}
+                  id={el.id}
+                  key={el.id}
+                />
+              ))
+          )
         ) : (
-          <span>Nothing is added</span>
+          <span className="span__text__absente">Add a task and complete!</span>
         )}
       </div>
     </main>

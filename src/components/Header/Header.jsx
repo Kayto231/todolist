@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../../index.scss";
+import { setSeactInput } from "../../redux/actions/todoappactions";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { searchInput } = useSelector((state) => state.todo);
+
   return (
     <header className="header">
       <div className="input__search">
@@ -10,6 +15,8 @@ const Header = () => {
           type="text"
           className="input"
           placeholder="Search for any training you want "
+          value={searchInput}
+          onChange={(e) => dispatch(setSeactInput(e.target.value))}
         />
       </div>
       <nav className="nav">

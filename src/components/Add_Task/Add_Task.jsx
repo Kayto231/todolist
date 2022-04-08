@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addTaskFunction } from "../../redux/actions/todoappactions";
+import { GREEN_COLOR, ORANGE_COLOR, RED_COLOR } from "../functions/consts";
 
 const Add_Task = () => {
-  const [status, setStatus] = useState("Pending");
-  const [priority, setPriority] = useState("Minor");
+  const [status, setStatus] = useState("PENDING_STATUS");
+  const [priority, setPriority] = useState("GREEN_COLOR");
   const [task, setTask] = useState("");
   const [taskValid, setTaskValid] = useState(true);
 
@@ -17,7 +18,6 @@ const Add_Task = () => {
     task.length >= 1 ? setTaskValid(false) : setTaskValid(true);
     setTask(e.target.value);
   };
-
   return (
     <div className="add_task__container">
       <header className="add_task_header">
@@ -39,8 +39,8 @@ const Add_Task = () => {
               className="form_width border"
               onChange={(e) => setStatus(e.target.value)}
             >
-              <option value="Pending">Pending</option>
-              <option value="In progress">In progress</option>
+              <option value="PENDING_STATUS">Pending</option>
+              <option value="PROGRESS_STATUS">In progress</option>
             </select>
           </div>
 
@@ -51,9 +51,9 @@ const Add_Task = () => {
             className="form_width border"
             onChange={(e) => setPriority(e.target.value)}
           >
-            <option value="Minor">Minor</option>
-            <option value="Normal">Normal</option>
-            <option value="Critical">Critical</option>
+            <option value="GREEN_COLOR">Minor</option>
+            <option value="ORANGE_COLOR">Normal</option>
+            <option value="RED_COLOR">Critical</option>
           </select>
 
           <input
@@ -70,9 +70,9 @@ const Add_Task = () => {
                 addTaskFunction(tasks, {
                   content: task,
                   status,
-                  priority,
                   isDone: false,
                   id: Math.random(),
+                  priority,
                 })
               )
             }

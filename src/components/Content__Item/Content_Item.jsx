@@ -1,14 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../index.scss";
+import { Link } from "react-router-dom";
 import {
   changeCompletedStateFunction,
+  setEditObjectFunction,
   removeTaskFunction,
 } from "../../redux/actions/todoappactions";
+import { setColorOfPseudo } from "../functions/setColorOfPseudo";
+import { setColorOfStatus } from "../functions/setColorOfStatus";
 
-const Content_Item = ({ content, status, priority, isDone, id }) => {
+const Content_Item = ({ content, status, isDone, priority, id }) => {
   const dispatch = useDispatch();
-  const { tasks } = useSelector((state) => state.todo);
+  const { tasks, isEdit } = useSelector((state) => state.todo);
+
   return (
     <div className="content__item">
       <div className="content__text">
@@ -16,21 +21,28 @@ const Content_Item = ({ content, status, priority, isDone, id }) => {
         <span className="text">{content}</span>
       </div>
       <div className="content__flex__row">
-        <div className="content__status">
-          <span className="status">{status}</span>
-        </div>
-        <div className="content__priority">
-          <img
-            className="img__priority"
-            src="./img/prioritybefore.svg"
-            alt="prioritybefore"
-          />
-          <span className="priority">{priority}</span>
-        </div>
+        {setColorOfStatus(status)}
+        {setColorOfPseudo(priority)}
         <div className="img__content__block">
           <img src="./img/itemsetting.svg" alt="itemsetting" />
           <div className="content__button__settings">
-            <span className="span__text">Edit</span>
+            <Link
+              to={"/edittask"}
+              onClick={() =>
+                dispatch(
+                  setEditObjectFunction(isEdit, {
+                    content,
+                    status,
+                    priority,
+                    isDone,
+                    id,
+                  })
+                )
+              }
+              className="span__text"
+            >
+              Edit
+            </Link>
             <span
               onClick={() =>
                 dispatch(
