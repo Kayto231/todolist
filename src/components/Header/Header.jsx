@@ -19,17 +19,6 @@ const Header = () => {
           onChange={(e) => dispatch(setSeactInput(e.target.value))}
         />
       </div>
-      <nav className="nav">
-        <ul className="ul">
-          <li className="li__bell">
-            <img className="circle" src="./img/circle.svg" alt="bell" />
-            <img src="./img/bell.svg" alt="bell" />
-          </li>
-          <li className="li">
-            <img src="./img/profile-foto.svg" alt="profile-foto" />
-          </li>
-        </ul>
-      </nav>
     </header>
   );
 };
