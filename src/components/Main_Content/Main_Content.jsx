@@ -4,13 +4,9 @@ import "../../index.scss";
 import { Link } from "react-router-dom";
 import Content_Item from "../Content__Item/Content_Item";
 import { useSelector } from "react-redux";
-import {
-  removeCompletedTaskFunction,
-  removeTaskFunction,
-} from "../../redux/actions/todoappactions";
 
 const Main_Content = () => {
-  const { tasks, completedTasks } = useSelector((state) => state.todo);
+  const { tasks } = useSelector((state) => state.todo);
   console.log(tasks);
   return (
     <main className="main">
@@ -31,18 +27,22 @@ const Main_Content = () => {
       <div className="main__content">
         <h1 className="text">On Hold</h1>
         <div className="content__block">
-          {tasks
-            .filter((el) => el.isDone === false)
-            .map((el) => (
-              <Content_Item
-                content={el.content}
-                status={el.status}
-                priority={el.priority}
-                isDone={el.isDone}
-                id={el.id}
-                key={el.id}
-              />
-            ))}
+          {tasks.length >= 1 ? (
+            tasks
+              .filter((el) => el.isDone === false)
+              .map((el) => (
+                <Content_Item
+                  content={el.content}
+                  status={el.status}
+                  priority={el.priority}
+                  isDone={el.isDone}
+                  id={el.id}
+                  key={el.id}
+                />
+              ))
+          ) : (
+            <span>Nothing is added</span>
+          )}
         </div>
       </div>
       <div className="main__footer">
@@ -54,18 +54,22 @@ const Main_Content = () => {
             </span>
           </h1>
         </div>
-        {tasks
-          .filter((el) => el.isDone === true)
-          .map((el) => (
-            <Content_Item
-              content={el.content}
-              status={el.status}
-              priority={el.priority}
-              isDone={el.isDone}
-              id={el.id}
-              key={el.id}
-            />
-          ))}
+        {tasks.length >= 1 ? (
+          tasks
+            .filter((el) => el.isDone === true)
+            .map((el) => (
+              <Content_Item
+                content={el.content}
+                status={el.status}
+                priority={el.priority}
+                isDone={el.isDone}
+                id={el.id}
+                key={el.id}
+              />
+            ))
+        ) : (
+          <span>Nothing is added</span>
+        )}
       </div>
     </main>
   );

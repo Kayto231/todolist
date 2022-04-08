@@ -70,6 +70,7 @@ const Add_Task = () => {
                   content: task,
                   status,
                   priority,
+                  isDone: false,
                   id: Math.random(),
                 })
               )
