@@ -22,7 +22,7 @@ const Add_Task = () => {
     <div className="add_task__container">
       <header className="add_task_header">
         <span className="add_task_text">
-          Create you <span className="highlight_red">Task</span>
+          Create your <span className="highlight_red">Task</span>
         </span>
         <Link to="/">
           <img src="./img/close.svg" alt="close-icon" className="img_close" />
@@ -32,14 +32,17 @@ const Add_Task = () => {
         <form action="" className="form_text">
           <label className="form_width">Choose a status for Task:</label>
 
-          <select
-            value={status}
-            className="form_width border"
-            onChange={(e) => setStatus(e.target.value)}
-          >
-            <option value="Pending">Pending</option>
-            <option value="In progress">In progress</option>
-          </select>
+          <div className="div">
+            {}
+            <select
+              value={status}
+              className="form_width border"
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="Pending">Pending</option>
+              <option value="In progress">In progress</option>
+            </select>
+          </div>
 
           <label className="form_width">Choose a priority for Task:</label>
 
@@ -65,8 +68,9 @@ const Add_Task = () => {
               dispatch(
                 addTaskFunction(tasks, {
                   content: task,
-                  status: status,
-                  priority: priority,
+                  status,
+                  priority,
+                  id: Math.random(),
                 })
               )
             }

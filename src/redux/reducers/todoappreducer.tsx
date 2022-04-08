@@ -1,36 +1,51 @@
 import { AnyAction } from "redux";
-import { ADD_TASK, REMOVE_TASK } from "../consts";
+import { ADD_TASK, CHANGE_COMPLETED_STATE, REMOVE_TASK } from "../consts";
 
-interface todoAppState {
-  tasks: Array<object>;
-  completedTasks: Array<object>;
+interface Itask {
+  content: string;
+  status: string;
+  priority: string;
+  isDone: boolean;
+  id: number;
 }
 
-const initialState: todoAppState = {
+interface ItodoAppState {
+  tasks: Itask[];
+  isEdit: boolean;
+}
+
+const initialState: ItodoAppState = {
   tasks: [
     {
       content: "Monitor system performance and adjust hardware.",
       status: "Pending",
       priority: "Minor",
+      isDone: false,
+      id: 1,
     },
     {
       content: "Monitor system performance and adjust hardware. 2",
       status: "Pending",
       priority: "Minor",
+      isDone: false,
+      id: 2,
     },
-  ],
-  completedTasks: [
     {
       content: "Monitor system performance and adjust hardware. 3",
       status: "Pending",
       priority: "Minor",
+      isDone: true,
+      id: 3,
     },
     {
       content: "Monitor system performance and adjust hardware. 4",
       status: "Pending",
       priority: "Minor",
+      isDone: true,
+      id: 4,
     },
   ],
+  isEdit: false,
 };
 
 export const todoAppReducer = (state = initialState, action: AnyAction) => {
@@ -41,6 +56,11 @@ export const todoAppReducer = (state = initialState, action: AnyAction) => {
         tasks: action.payload,
       };
     case REMOVE_TASK:
+      return {
+        ...state,
+        tasks: action.payload,
+      };
+    case CHANGE_COMPLETED_STATE:
       return {
         ...state,
         tasks: action.payload,
