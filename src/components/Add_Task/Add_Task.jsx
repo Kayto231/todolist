@@ -63,7 +63,8 @@ const Add_Task = () => {
             value={task}
             onChange={(e) => handleTaskChange(e)}
           />
-          <button
+          <Link
+            to={"/"}
             onClick={() =>
               dispatch(
                 addTaskFunction(tasks, {
@@ -80,7 +81,7 @@ const Add_Task = () => {
             type="button"
           >
             Add
-          </button>
+          </Link>
         </form>
       </div>
     </div>
