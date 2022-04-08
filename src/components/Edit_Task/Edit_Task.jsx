@@ -11,7 +11,7 @@ const Edit_Task = () => {
   const { tasks, isEdit, editObject } = useSelector((state) => state.todo);
 
   const [status, setStatus] = useState(editObject.status);
-  const [priority, setPriority] = useState(editObject.type);
+  const [priority, setPriority] = useState(editObject.priority);
   const [task, setTask] = useState(editObject.content);
   const [taskValid, setTaskValid] = useState(true);
 
