@@ -168,25 +168,18 @@ body {
         border: 0;
         outline: none;
       }
-    }
-    .nav {
-      flex: 1 1 auto;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      .ul {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .li__bell {
-          .circle {
-            position: relative;
-            left: 17px;
-          }
-          margin-right: 23px;
-        }
+     
+      .opacity05 {
+        opacity: 0.5;
+      }
+      .opacity1 {
+        opacity: 1;
+      }
+      .close-image__header {
+        margin-left: 20px;
       }
     }
+    
   }
   .main__container {
     background: #ffffff;

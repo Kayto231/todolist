@@ -2,10 +2,8 @@ import { AnyAction } from "redux";
 import {
   ADD_TASK,
   CHANGE_COMPLETED_STATE,
-  CHANGE_ISEDIT_STATE,
   GET_TASKS_LOADED,
   REMOVE_TASK,
-  SET_EDIT_OBJECT,
   SET_SEARCH_INPUT,
 } from "../consts";
 
@@ -19,15 +17,11 @@ interface Itask {
 
 interface ItodoAppState {
   tasks: Itask[];
-  isEdit: boolean;
-  editObject: any;
   searchInput: string;
 }
 
 const initialState: ItodoAppState = {
   tasks: [],
-  isEdit: false,
-  editObject: {},
   searchInput: "",
 };
 
@@ -37,16 +31,6 @@ export const todoAppReducer = (state = initialState, action: AnyAction) => {
       return {
         ...state,
         searchInput: action.payload,
-      };
-    case SET_EDIT_OBJECT:
-      return {
-        ...state,
-        editObject: action.payload,
-      };
-    case CHANGE_ISEDIT_STATE:
-      return {
-        ...state,
-        isEdit: action.payload,
       };
     case GET_TASKS_LOADED:
       return {

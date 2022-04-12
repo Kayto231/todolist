@@ -18,6 +18,18 @@ const Header = () => {
           value={searchInput}
           onChange={(e) => dispatch(setSeactInput(e.target.value))}
         />
+        <img
+          className={
+            searchInput.length >= 1
+              ? "close-image__header opacity1"
+              : "close-image__header opacity05"
+          }
+          src="./img/close.svg"
+          alt="close-image"
+          width={12}
+          height={12}
+          onClick={() => dispatch(setSeactInput(""))}
+        />
       </div>
     </header>
   );

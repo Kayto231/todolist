@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../index.scss";
 import { Link } from "react-router-dom";
 import {
-  changeCompletedStateFunction,
-  setEditObjectFunction,
   removeTaskFunction,
+  changeCompletedStateFunction,
 } from "../../redux/actions/todoappactions";
+import { setEditObjectFunction } from "../../redux/actions/editactions";
 import { setColorOfPseudo } from "../functions/setColorOfPseudo";
 import { setColorOfStatus } from "../functions/setColorOfStatus";
 
 const Content_Item = ({ content, status, isDone, priority, id }) => {
   const dispatch = useDispatch();
-  const { tasks, isEdit } = useSelector((state) => state.todo);
+  const { tasks } = useSelector((state) => state.todo);
+  const { isEdit } = useSelector((state) => state.edit);
 
   return (
     <div className="content__item">

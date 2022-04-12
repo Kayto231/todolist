@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import "../../index.scss";
 
 import { Link } from "react-router-dom";
-import Content_Item from "../Content__Item/Content_Item";
 import { useDispatch, useSelector } from "react-redux";
-import { getTasksLoadedFunction } from "../../redux/actions/todoappactions";
+
+import Content_Item from "../Content__Item/Content_Item";
+
+import { getTasksLoadedFunction } from "../../redux/actions/authactions";
 
 const Main_Content = () => {
   const { tasks, searchInput } = useSelector((state) => state.todo);

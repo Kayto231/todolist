@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { addTaskFunction } from "../../redux/actions/todoappactions";
-import { GREEN_COLOR, ORANGE_COLOR, RED_COLOR } from "../functions/consts";
 
 const Add_Task = () => {
   const [status, setStatus] = useState("PENDING_STATUS");
